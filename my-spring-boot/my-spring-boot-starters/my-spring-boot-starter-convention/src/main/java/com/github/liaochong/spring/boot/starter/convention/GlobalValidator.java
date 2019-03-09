@@ -16,8 +16,8 @@ package com.github.liaochong.spring.boot.starter.convention;
 
 import com.github.liaochong.myconvention.common.exception.ServiceInvalidException;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -48,7 +48,7 @@ public class GlobalValidator {
 
     }
 
-    @Before("pointcut()")
+    @Around("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();

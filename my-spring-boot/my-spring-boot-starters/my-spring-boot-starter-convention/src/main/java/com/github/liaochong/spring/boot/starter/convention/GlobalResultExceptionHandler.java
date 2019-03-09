@@ -14,8 +14,10 @@
  */
 package com.github.liaochong.spring.boot.starter.convention;
 
+import com.github.liaochong.myconvention.common.code.DefaultApplicationCode;
 import com.github.liaochong.myconvention.common.exception.ServiceErrorException;
 import com.github.liaochong.myconvention.common.exception.ServiceException;
+import com.github.liaochong.myconvention.common.exception.ServiceInvalidException;
 import com.github.liaochong.myconvention.common.util.UnsafeResults;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -42,6 +44,8 @@ public class GlobalResultExceptionHandler {
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             return joinPoint.proceed();
+        } catch (ServiceInvalidException e) {
+            return UnsafeResults.failure(DefaultApplicationCode.VALIDATE_FAILURE, e.getViolationItems());
         } catch (ServiceException e) {
             return UnsafeResults.failure(e.getApplicationCode());
         } catch (ServiceErrorException e) {

@@ -9,7 +9,8 @@ spring-boot-convention是作者在多家公司获得的最佳实践合集，针�
 
 ### 依赖关系
 * my-example
-  - my-spring-boot
+  - my-spring-boot-starter-parent
+  - my-spring-boot-starter-convention
     - my-convention-common
       - my-convention-api
       

@@ -18,7 +18,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <my-convention.version>1.0.0</my-convention.version>
+
+        <my-convention-api.version>1.0.0</my-convention-api.version>
+        <my-convention-common.version>1.0.0</my-convention-common.version>
     </properties>
 
     <dependencyManagement>
@@ -26,12 +28,12 @@
             <dependency>
                 <groupId>com.github.liaochong</groupId>
                 <artifactId>my-convention-api</artifactId>
-                <version>${my-convention.version}</version>
+                <version>${my-convention-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.liaochong</groupId>
                 <artifactId>my-convention-common</artifactId>
-                <version>${my-convention.version}</version>
+                <version>${my-convention-common.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

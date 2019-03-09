@@ -14,7 +14,7 @@
  */
 package com.github.liaochong.spring.boot.starter.convention;
 
-import com.github.liaochong.myconvention.common.exception.ServiceException;
+import com.github.liaochong.myconvention.common.exception.ServiceInvalidException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -25,7 +25,9 @@ import org.springframework.core.annotation.Order;
 import javax.validation.ConstraintViolation;
 import javax.validation.executable.ExecutableValidator;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author liaochong
@@ -55,8 +57,7 @@ public class GlobalValidator {
         if (validResult.isEmpty()) {
             return joinPoint.proceed();
         }
-        ConstraintViolation constraintViolation = validResult.iterator().next();
-        // TODO
-        throw new ServiceException(null);
+        List<String> invalidMessages = validResult.stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
+        throw new ServiceInvalidException(invalidMessages);
     }
 }

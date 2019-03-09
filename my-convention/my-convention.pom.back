@@ -2,12 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.liaochong</groupId>
@@ -58,33 +52,6 @@
         </dependency>
     </dependencies>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <issueManagement>
-        <system>Github Issue</system>
-        <url>https://github.com/liaochong/spring-boot-convention/issues</url>
-    </issueManagement>
-
-    <scm>
-        <url>https://github.com/liaochong/spring-boot-convention</url>
-        <connection>https://github.com/liaochong/spring-boot-convention.git</connection>
-        <developerConnection>https://github.com/liaochong/spring-boot-convention.git</developerConnection>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>liaochong</name>
-            <email>1475958950@qq.com</email>
-            <url>https://github.com/liaochong/spring-boot-convention</url>
-        </developer>
-    </developers>
-
     <build>
         <plugins>
             <plugin>
@@ -108,14 +75,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <configuration>
-                    <aggregate>true</aggregate>
                 </configuration>
             </plugin>
         </plugins>

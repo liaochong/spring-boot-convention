@@ -26,7 +26,11 @@ public enum DefaultApplicationCode implements ApplicationCode {
     /**
      * 系统异常
      */
-    SYSTEM_EXCEPTION("C_1", "系统异常");
+    SYSTEM_EXCEPTION("C_1", "系统异常"),
+    /**
+     * 参数校验失败
+     */
+    VALIDATE_FAILURE("C_2", "参数校验失败");
 
     private String code;
 

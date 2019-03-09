@@ -15,7 +15,6 @@
 package com.github.liaochong.myconvention.common.util;
 
 import com.github.liaochong.myconvention.api.PagingResult;
-import com.sun.istack.internal.NotNull;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class Pages {
 
-    public static <E, T> PagingResult<T> map(@NotNull PagingResult<E> originPagingResult, @NotNull Function<E, T> convertFunction) {
+    public static <E, T> PagingResult<T> map(PagingResult<E> originPagingResult, Function<E, T> convertFunction) {
         PagingResult<T> result = new PagingResult<>();
         result.setPageIndex(originPagingResult.getPageIndex());
         result.setPageSize(originPagingResult.getPageSize());

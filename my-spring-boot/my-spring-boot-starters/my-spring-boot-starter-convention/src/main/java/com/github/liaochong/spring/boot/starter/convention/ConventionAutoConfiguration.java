@@ -15,9 +15,15 @@
 package com.github.liaochong.spring.boot.starter.convention;
 
 import com.github.liaochong.spring.boot.starter.convention.properties.ConventionProperties;
+import org.hibernate.validator.HibernateValidator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+
+import javax.annotation.Resource;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import javax.validation.executable.ExecutableValidator;
 
 /**
  * @author liaochong
@@ -25,6 +31,9 @@ import org.springframework.context.annotation.Bean;
  */
 @EnableConfigurationProperties(ConventionProperties.class)
 public class ConventionAutoConfiguration {
+
+    @Resource
+    private ConventionProperties conventionProperties;
 
     @Bean
     @ConditionalOnMissingBean
@@ -35,6 +44,9 @@ public class ConventionAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public GlobalValidator globalValidator() {
-        return new GlobalValidator();
+        boolean fastFail = conventionProperties.isValidMethodParamsFastFail();
+        ValidatorFactory factory = Validation.byProvider(HibernateValidator.class).configure().failFast(fastFail).buildValidatorFactory();
+        ExecutableValidator executableValidator = factory.getValidator().forExecutables();
+        return new GlobalValidator(executableValidator);
     }
 }

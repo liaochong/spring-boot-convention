@@ -28,4 +28,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "myconvention.result")
 public class ConventionProperties {
 
+    boolean validMethodParamsFastFail = true;
 }

@@ -14,16 +14,18 @@
  */
 package com.github.liaochong.spring.boot.starter.convention;
 
+import com.github.liaochong.myconvention.common.exception.ServiceException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.hibernate.validator.HibernateValidator;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
+import javax.validation.ConstraintViolation;
 import javax.validation.executable.ExecutableValidator;
+import java.lang.reflect.Method;
+import java.util.Set;
 
 /**
  * @author liaochong
@@ -33,11 +35,10 @@ import javax.validation.executable.ExecutableValidator;
 @Order(-999998)
 public class GlobalValidator {
 
-    private static final ExecutableValidator executableValidator;
+    private ExecutableValidator executableValidator;
 
-    static {
-        ValidatorFactory factory = Validation.byProvider(HibernateValidator.class).configure().buildValidatorFactory();
-        executableValidator = factory.getValidator().forExecutables();
+    public GlobalValidator(ExecutableValidator executableValidator) {
+        this.executableValidator = executableValidator;
     }
 
     @Pointcut("@annotation(com.github.liaochong.spring.boot.starter.convention.annotation.Validated)||@within(com.github.liaochong.spring.boot.starter.convention.annotation.Validated)")
@@ -47,6 +48,15 @@ public class GlobalValidator {
 
     @Before("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        return joinPoint.proceed();
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+
+        Set<ConstraintViolation<Object>> validResult = executableValidator.validateParameters(joinPoint.getTarget(), method, joinPoint.getArgs());
+        if (validResult.isEmpty()) {
+            return joinPoint.proceed();
+        }
+        ConstraintViolation constraintViolation = validResult.iterator().next();
+        // TODO
+        throw new ServiceException(null);
     }
 }

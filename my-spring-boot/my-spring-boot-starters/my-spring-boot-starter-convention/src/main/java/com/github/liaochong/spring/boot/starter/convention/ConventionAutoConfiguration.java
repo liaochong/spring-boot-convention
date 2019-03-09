@@ -14,9 +14,27 @@
  */
 package com.github.liaochong.spring.boot.starter.convention;
 
+import com.github.liaochong.spring.boot.starter.convention.properties.ConventionProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+
 /**
  * @author liaochong
  * @version 1.0
  */
+@EnableConfigurationProperties(ConventionProperties.class)
 public class ConventionAutoConfiguration {
+
+    @Bean
+    @ConditionalOnMissingBean
+    public GlobalResultExceptionHandler globalResultExceptionHandler() {
+        return new GlobalResultExceptionHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public GlobalValidator globalValidator() {
+        return new GlobalValidator();
+    }
 }

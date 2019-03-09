@@ -16,6 +16,7 @@ package com.github.liaochong.myconvention.common.util;
 
 import com.github.liaochong.myconvention.api.Result;
 import com.github.liaochong.myconvention.common.code.ApplicationCode;
+import com.github.liaochong.myconvention.common.code.DefaultApplicationCode;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -33,6 +34,10 @@ public class UnsafeResults {
 
     public static <T> Result<T> failure(ApplicationCode applicationCode, T data) {
         return new Result<>(applicationCode.code(), applicationCode.message(), data);
+    }
+
+    public static <T> Result<T> error() {
+        return new Result<>(DefaultApplicationCode.SYSTEM_EXCEPTION.code(), DefaultApplicationCode.SYSTEM_EXCEPTION.message(), null);
     }
 
 }

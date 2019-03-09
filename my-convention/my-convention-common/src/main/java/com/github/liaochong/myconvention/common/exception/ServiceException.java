@@ -28,22 +28,11 @@ public class ServiceException extends RuntimeException {
 
     private ApplicationCode applicationCode;
 
-    private Throwable originException;
-
     public ServiceException(ApplicationCode applicationCode) {
-        this.applicationCode = applicationCode;
-    }
-
-    public ServiceException(ApplicationCode applicationCode, Throwable cause) {
-        this.originException = cause;
         this.applicationCode = applicationCode;
     }
 
     public ApplicationCode getApplicationCode() {
         return applicationCode;
-    }
-
-    public Throwable getOriginException() {
-        return originException;
     }
 }

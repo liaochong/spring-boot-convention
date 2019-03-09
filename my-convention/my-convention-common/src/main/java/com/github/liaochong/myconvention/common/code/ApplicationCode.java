@@ -17,13 +17,25 @@ package com.github.liaochong.myconvention.common.code;
 import com.github.liaochong.myconvention.common.exception.ServiceException;
 
 /**
+ * 系统编码，含成功、错误、异常编码
+ *
  * @author liaochong
  * @version 1.0
  */
 public interface ApplicationCode {
 
+    /**
+     * 编码
+     *
+     * @return 编码
+     */
     String code();
 
+    /**
+     * 编码对应的信息
+     *
+     * @return 信息
+     */
     String message();
 
     default void failure() {

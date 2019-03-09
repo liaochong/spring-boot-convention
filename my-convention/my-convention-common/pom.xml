@@ -12,5 +12,11 @@
     <artifactId>my-convention-common</artifactId>
     <version>1.0.0</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.liaochong</groupId>
+            <artifactId>my-convention-api</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

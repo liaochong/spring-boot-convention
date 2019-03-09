@@ -12,28 +12,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.liaochong.myconvention.api;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.experimental.FieldDefaults;
-
-import java.io.Serializable;
+package com.github.liaochong.myconvention.common.code;
 
 /**
  * @author liaochong
  * @version 1.0
  */
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-public class Result<T> implements Serializable {
-    private static final long serialVersionUID = 7355687818666182837L;
+public enum DefaultApplicationCode implements ApplicationCode {
+    /**
+     * 请求成功
+     */
+    REQUEST_SUCCESS("C_0", "请求成功"),
+    /**
+     * 系统异常
+     */
+    SYSTEM_EXCEPTION("C_1", "系统异常");
 
-    String code;
+    private String code;
 
-    String message;
+    private String message;
 
-    T data;
+    DefaultApplicationCode(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    @Override
+    public String code() {
+        return code;
+    }
+
+    @Override
+    public String message() {
+        return message;
+    }
 }

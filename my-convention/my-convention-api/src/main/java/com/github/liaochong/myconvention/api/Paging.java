@@ -56,4 +56,13 @@ public class Paging implements Serializable {
         }
         this.pageSize = pageSize > 0 ? pageSize : DEFAULT_PAGE_SIZE;
     }
+
+    /**
+     * 偏移量
+     *
+     * @return 偏移量
+     */
+    public long getOffset() {
+        return (pageIndex - 1) * pageSize;
+    }
 }

@@ -12,28 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.liaochong.myconvention.api;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.experimental.FieldDefaults;
-
-import java.io.Serializable;
+package com.github.liaochong.myconvention.common.exception;
 
 /**
  * @author liaochong
  * @version 1.0
  */
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-public class Result<T> implements Serializable {
-    private static final long serialVersionUID = 7355687818666182837L;
+public class ServiceErrorException extends RuntimeException {
+    private static final long serialVersionUID = -6372658094838636988L;
 
-    String code;
+    public ServiceErrorException(String message) {
+        super(message);
+    }
 
-    String message;
-
-    T data;
+    public ServiceErrorException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

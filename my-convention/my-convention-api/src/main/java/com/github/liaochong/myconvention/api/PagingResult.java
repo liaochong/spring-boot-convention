@@ -21,6 +21,7 @@ import lombok.experimental.FieldDefaults;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author liaochong
@@ -39,4 +40,10 @@ public class PagingResult<T> implements Serializable {
 
     List<T> data = Collections.emptyList();
 
+    public void setData(List<T> data) {
+        if (Objects.isNull(data)) {
+            return;
+        }
+        this.data = data;
+    }
 }

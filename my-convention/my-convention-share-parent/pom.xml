@@ -14,6 +14,7 @@
     <version>1.0.0</version>
 
     <name>my-convention-share-parent</name>
+    <description>my-convention-share-parent，为各类rpc（含spring cloud）方式调用提供依赖包.</description>
 
     <dependencies>
         <dependency>

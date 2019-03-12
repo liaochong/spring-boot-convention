@@ -6,10 +6,10 @@ spring-boot-convention是作者在多家公司获得的最佳实践合集，针�
 4. 扩大hibernate validator参数校验范围，解除只能在controller中校验并且需要手动处理校验不通过数据的限制；
 
 ## 模块介绍 | Module introduce
-* my-convention
-  - my-convention-api
-  - my-convention-common
-  - my-convention-share-parent
+* my-convention（规约父pom，定义下属模块通用配置，如build）
+  - my-convention-api（api模块，只包含Paging、Result、PagingResult等输入输出基础类，独立出来方便集成到RPC依赖包中）
+  - my-convention-common（common模块，包含规约异常定义，api模块通用的工具类，系统编码的定义）
+  - my-convention-share-parent（share-parent模块，pom文件，定义RPC依赖包必须的依赖，如Hibernate validator、api模块、lombok等）
 * my-spring-boot
   - my-spring-boot-parent
   - my-spring-boot-starters

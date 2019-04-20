@@ -30,7 +30,11 @@ public enum DefaultApplicationCode implements ApplicationCode {
     /**
      * 参数校验失败
      */
-    VALIDATE_FAILURE("C_2", "参数校验失败");
+    VALIDATE_FAILURE("C_2", "参数校验失败"),
+    /**
+     * 参数绑定非法
+     */
+    BINDING_INVALID_FAILURE("C_2_1", "参数非法，请检查参数正确性");
 
     private String code;
 

@@ -30,16 +30,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
+ * 全局参数校验器
+ *
  * @author liaochong
  * @version 1.0
  */
 @Aspect
 @Order(-999998)
-public class GlobalValidator {
+public class GlobalParametersValidator {
 
     private ExecutableValidator executableValidator;
 
-    public GlobalValidator(ExecutableValidator executableValidator) {
+    public GlobalParametersValidator(ExecutableValidator executableValidator) {
         this.executableValidator = executableValidator;
     }
 

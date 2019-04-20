@@ -43,10 +43,10 @@ public class ConventionAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public GlobalValidator globalValidator() {
+    public GlobalParametersValidator globalParametersValidator() {
         boolean fastFail = conventionProperties.isValidMethodParamsFastFail();
         ValidatorFactory factory = Validation.byProvider(HibernateValidator.class).configure().failFast(fastFail).buildValidatorFactory();
         ExecutableValidator executableValidator = factory.getValidator().forExecutables();
-        return new GlobalValidator(executableValidator);
+        return new GlobalParametersValidator(executableValidator);
     }
 }

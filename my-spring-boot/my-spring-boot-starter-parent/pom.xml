@@ -16,7 +16,7 @@
     <version>1.0.0</version>
 
     <name>my-spring-boot-starter-parent</name>
-    <url>http://www.example.com</url>
+    <url>https://github.com/liaochong/spring-boot-convention</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,6 +53,14 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

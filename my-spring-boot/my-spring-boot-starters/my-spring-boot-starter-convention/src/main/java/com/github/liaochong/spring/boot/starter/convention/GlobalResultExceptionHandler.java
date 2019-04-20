@@ -15,9 +15,9 @@
 package com.github.liaochong.spring.boot.starter.convention;
 
 import com.github.liaochong.myconvention.common.code.DefaultApplicationCode;
-import com.github.liaochong.myconvention.common.exception.ServiceErrorException;
 import com.github.liaochong.myconvention.common.exception.ServiceException;
 import com.github.liaochong.myconvention.common.exception.ServiceInvalidException;
+import com.github.liaochong.myconvention.common.exception.SystemException;
 import com.github.liaochong.myconvention.common.util.UnsafeResults;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -41,17 +41,17 @@ public class GlobalResultExceptionHandler {
     }
 
     @Around("pointcut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object around(ProceedingJoinPoint joinPoint) {
         try {
             return joinPoint.proceed();
         } catch (ServiceInvalidException e) {
             return UnsafeResults.failure(DefaultApplicationCode.VALIDATE_FAILURE, e.getViolationItems());
         } catch (ServiceException e) {
             return UnsafeResults.failure(e.getApplicationCode());
-        } catch (ServiceErrorException e) {
+        } catch (SystemException e) {
             log.error("系统异常", e);
             return UnsafeResults.error();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             log.error("未知的系统异常", e);
             return UnsafeResults.error();
         }

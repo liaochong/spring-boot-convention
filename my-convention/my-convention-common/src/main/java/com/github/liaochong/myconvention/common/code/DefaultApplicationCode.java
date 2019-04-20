@@ -15,6 +15,8 @@
 package com.github.liaochong.myconvention.common.code;
 
 /**
+ * 默认应用编码，框架使用，其他请勿使用
+ *
  * @author liaochong
  * @version 1.0
  */

@@ -34,8 +34,8 @@ public class Pages {
         result.setPageSize(originPagingResult.getPageSize());
         result.setTotalCount(originPagingResult.getTotalCount());
 
-        List<T> convertResult = originPagingResult.getData().stream().map(convertFunction).collect(Collectors.toList());
-        result.setData(convertResult);
+        List<T> convertResult = originPagingResult.getDataList().stream().map(convertFunction).collect(Collectors.toList());
+        result.setDataList(convertResult);
         return result;
     }
 

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * 分页结果
+ *
  * @author liaochong
  * @version 1.0
  */
@@ -38,12 +40,12 @@ public class PagingResult<T> implements Serializable {
 
     long totalCount;
 
-    List<T> data = Collections.emptyList();
+    List<T> dataList = Collections.emptyList();
 
-    public void setData(List<T> data) {
+    public void setDataList(List<T> data) {
         if (Objects.isNull(data)) {
             return;
         }
-        this.data = data;
+        this.dataList = data;
     }
 }

@@ -17,28 +17,21 @@ package com.github.liaochong.myconvention.common.util;
 import com.github.liaochong.myconvention.common.code.ApplicationCode;
 import lombok.experimental.UtilityClass;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
+ * 预校验工具
+ *
  * @author liaochong
  * @version 1.0
  */
 @UtilityClass
 public class Preconditions {
 
-    public static void checkArgument(boolean expression) {
-        if (!expression) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     public static void checkArgument(boolean expression, ApplicationCode applicationCode) {
         if (!expression) {
             applicationCode.failure();
-        }
-    }
-
-    public static void checkState(boolean expression) {
-        if (!expression) {
-            throw new IllegalStateException();
         }
     }
 
@@ -48,19 +41,41 @@ public class Preconditions {
         }
     }
 
-    public static <T> T checkNotNull(T reference) {
-        if (reference == null) {
-            throw new NullPointerException();
-        } else {
-            return reference;
-        }
-    }
-
     public static <T> T checkNotNull(T reference, ApplicationCode applicationCode) {
         if (reference == null) {
             applicationCode.failure();
         }
         return reference;
+    }
+
+    public static <T> void checkNull(T reference, ApplicationCode applicationCode) {
+        if (Objects.nonNull(reference)) {
+            applicationCode.failure();
+        }
+    }
+
+    public static <T> void checkNotEmpty(List<T> list, ApplicationCode applicationCode) {
+        if (Objects.isNull(list) || list.isEmpty()) {
+            applicationCode.failure();
+        }
+    }
+
+    public static <T> void checkEmpty(List<T> list, ApplicationCode applicationCode) {
+        if (Objects.nonNull(list) && !list.isEmpty()) {
+            applicationCode.failure();
+        }
+    }
+
+    public static <T> void checkNotBlank(String s, ApplicationCode applicationCode) {
+        if (Objects.isNull(s) || s.trim().isEmpty()) {
+            applicationCode.failure();
+        }
+    }
+
+    public static <T> void checkBlank(String s, ApplicationCode applicationCode) {
+        if (Objects.nonNull(s) && !s.trim().isEmpty()) {
+            applicationCode.failure();
+        }
     }
 
 }

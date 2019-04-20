@@ -24,9 +24,14 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 
+import java.lang.reflect.Method;
+
 /**
+ * 全局异常拦截处理器
+ *
  * @author liaochong
  * @version 1.0
  */
@@ -42,6 +47,8 @@ public class GlobalResultExceptionHandler {
 
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) {
+        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+        Object[] args = joinPoint.getArgs();
         try {
             return joinPoint.proceed();
         } catch (ServiceInvalidException e) {
@@ -49,10 +56,10 @@ public class GlobalResultExceptionHandler {
         } catch (ServiceException e) {
             return UnsafeResults.failure(e.getApplicationCode());
         } catch (SystemException e) {
-            log.error("系统异常", e);
+            log.error("系统异常，方法[{}]，参数[{}]", method, args, e);
             return UnsafeResults.error();
         } catch (Throwable e) {
-            log.error("未知的系统异常", e);
+            log.error("未知的系统异常，方法[{}]，参数[{}]", method, args, e);
             return UnsafeResults.error();
         }
     }

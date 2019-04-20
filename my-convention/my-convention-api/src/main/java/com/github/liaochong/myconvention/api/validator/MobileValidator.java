@@ -12,29 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.liaochong.myconvention.common.exception;
+package com.github.liaochong.myconvention.api.validator;
 
-import com.github.liaochong.myconvention.common.code.DefaultApplicationCode;
-
-import java.util.List;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
- * 框架使用，建议不要使用
- *
  * @author liaochong
  * @version 1.0
  */
-public class ServiceInvalidException extends ServiceException {
-    private static final long serialVersionUID = 6595542294997611244L;
+public class MobileValidator implements ConstraintValidator<Mobile, String> {
 
-    private List<String> violationItems;
+    private static final Pattern MOBILE_PATTERN = Pattern.compile("^(\\+?0?86\\-?)?1[345789]\\d{9}$");
 
-    public ServiceInvalidException(List<String> violationItems) {
-        super(DefaultApplicationCode.VALIDATE_FAILURE);
-        this.violationItems = violationItems;
+    @Override
+    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        return Objects.isNull(s) || MOBILE_PATTERN.matcher(s).matches();
     }
 
-    public List<String> getViolationItems() {
-        return violationItems;
+    @Override
+    public void initialize(Mobile constraintAnnotation) {
+
     }
 }

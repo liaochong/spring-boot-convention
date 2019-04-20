@@ -15,17 +15,19 @@
 package com.github.liaochong.myconvention.common.exception;
 
 /**
+ * 系统异常
+ *
  * @author liaochong
  * @version 1.0
  */
-public class ServiceErrorException extends RuntimeException {
+public class SystemException extends RuntimeException {
     private static final long serialVersionUID = -6372658094838636988L;
 
-    public ServiceErrorException(String message) {
+    public SystemException(String message) {
         super(message);
     }
 
-    public ServiceErrorException(String message, Throwable cause) {
+    public SystemException(String message, Throwable cause) {
         super(message, cause);
     }
 }

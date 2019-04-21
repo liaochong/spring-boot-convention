@@ -17,7 +17,11 @@ package com.github.liaochong.spring.boot.starter.convention.properties;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.apache.http.entity.ContentType;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author liaochong
@@ -25,8 +29,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@ConfigurationProperties(prefix = "myconvention.result")
+@ConfigurationProperties(prefix = "my.convention")
 public class ConventionProperties {
 
     boolean validMethodParamsFastFail = true;
+
+    @URL(message = "异常信息发送URL")
+    String messageSendUrl;
+
+    String messageContentType = ContentType.APPLICATION_JSON.getMimeType();
+
+    @NotBlank(message = "环境名称不可为空")
+    String envName;
 }

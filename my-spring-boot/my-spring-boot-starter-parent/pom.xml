@@ -39,7 +39,16 @@
                 <artifactId>commons-collections4</artifactId>
                 <version>4.3</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>fluent-hc</artifactId>
+                <version>4.5.8</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.57</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.liaochong</groupId>
                 <artifactId>my-convention-common</artifactId>

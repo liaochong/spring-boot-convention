@@ -29,10 +29,14 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * 默认异常信息发送
+ * 默认异常信息发送，可直接配合钉钉自定义机器人使用
+ * <p>
+ * 详情参见：https://open-doc.dingtalk.com/microapp/serverapi2/qf2nxq#-6
+ * </p>
  *
  * @author liaochong
  * @version 1.0
@@ -66,7 +70,7 @@ public class DefaultExceptionMessageSender implements ExceptionMessageSender {
                         + "**异常信息：**\n\n（" + throwable.getClass().getName() + "）" + throwable.getMessage() + " \n\n ");
                 message.setMarkDown(markDown);
 
-                String result = Request.Post(conventionProperties.getMessageSendUrl())
+                String result = Request.Post(Objects.isNull(sendUrl) ? conventionProperties.getMessageSendUrl() : sendUrl)
                         .connectTimeout(5_000)
                         .socketTimeout(3_0000)
                         .bodyString(JSON.toJSONString(message), ContentType.parse(conventionProperties.getMessageContentType()).withCharset(StandardCharsets.UTF_8))

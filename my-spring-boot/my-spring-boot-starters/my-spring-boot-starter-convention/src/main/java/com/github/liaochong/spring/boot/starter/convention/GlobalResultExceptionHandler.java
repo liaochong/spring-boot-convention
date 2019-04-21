@@ -25,9 +25,11 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 /**
  * 全局异常拦截处理器
@@ -39,6 +41,9 @@ import java.lang.reflect.Method;
 @Order(-999999)
 @Slf4j
 public class GlobalResultExceptionHandler {
+
+    @Autowired(required = false)
+    private ExceptionMessageSender exceptionMessageSender;
 
     @Pointcut("execution(com.github.liaochong.myconvention.api.Result+ *..*.*(..))")
     private void pointcut() {
@@ -59,6 +64,9 @@ public class GlobalResultExceptionHandler {
             log.error("系统异常，方法[{}]，参数[{}]", method, args, e);
             return UnsafeResults.error();
         } catch (Throwable e) {
+            if (Objects.nonNull(exceptionMessageSender)) {
+                exceptionMessageSender.sendMessage(null, method, args, e);
+            }
             log.error("未知的系统异常，方法[{}]，参数[{}]", method, args, e);
             return UnsafeResults.error();
         }
